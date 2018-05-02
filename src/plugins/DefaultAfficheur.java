@@ -1,11 +1,13 @@
 package plugins;
 
 import application.IAfficheur;
+import application.Vache;
 
 public class DefaultAfficheur implements IAfficheur{
 
-	public void lancement(){};
-	
-	public void fermeture(){};
+	@Override
+	public String afficher(Vache vache) {
+		return vache.toString();
+	};
 	
 }

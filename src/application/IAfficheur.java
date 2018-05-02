@@ -2,9 +2,7 @@ package application;
 
 public interface IAfficheur {
 	
-	public void lancement();
-	
-	public void fermeture();
+	public String afficher(final Vache vache);
 	
 
 }

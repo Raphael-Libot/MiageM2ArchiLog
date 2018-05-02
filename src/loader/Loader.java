@@ -8,27 +8,55 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-
+import application.IAfficheur;
 import application.Vache;
 import plugins.ChargementVaches;
-
+import plugins.DefaultAfficheur;
 import plugins.DefaultWindows;
 
 
 public class Loader {
 	
 	private static List<DescripteurPlugin> listDescriptionPlugin = new ArrayList<>();
+	private static IAfficheur afficheur;
+	private static Loader instance = new Loader();
+	private static DefaultWindows fenetre;
+	private static Vache vache;
+	
+	public static Loader getInstance(){
+		return instance;
+	}
 	
 	public static void main(String[] args) throws IllegalAccessException, InstantiationException, FileNotFoundException, IOException {
 
+		afficheur = new DefaultAfficheur();
+		
 		listDescriptionPlugin = chargementPlugins();
-		Vache vache = (Vache) ChargementVaches.chargementVaches();
+		vache = (Vache) ChargementVaches.chargementVaches();
 		System.out.println(vache.toString());
 		
-		DefaultWindows fenetre = new DefaultWindows();
+		fenetre = new DefaultWindows();
+		
+		for(DescripteurPlugin d : listDescriptionPlugin) {
+			fenetre.ajoutBoutonAfficheur(d.getNomClasse());
+		}
+		
 		fenetre.display();
+		
+		fenetre.afficherVache(afficheur.afficher(vache));
+		
 
     }
+	
+	
+	public static void changementAfficheur(String nom) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		for(DescripteurPlugin d : listDescriptionPlugin) {
+			if(d.getNomClasse().equals(nom)){
+				afficheur = (IAfficheur) Class.forName(d.getNomClasse()).newInstance();
+				fenetre.afficherVache(afficheur.afficher(vache));
+			}
+		}
+	}
 	
 	/**
 	 * Chargement de l'ensemble de des plugins 
@@ -70,5 +98,10 @@ public class Loader {
 		return null;
 	}
 
+	public static IAfficheur getAfficheur() {
+		return afficheur;
+	}
 
+
+	
 }
