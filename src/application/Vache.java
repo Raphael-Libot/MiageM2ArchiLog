@@ -11,6 +11,9 @@ public class Vache {
 	private String type;
 	
 	private boolean nourri;
+	
+	public Vache() {
+	}
 
 	public Vache(String nom, int age, String race, String type, boolean nourri) {
 		super();

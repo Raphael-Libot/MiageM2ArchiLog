@@ -1,0 +1,6 @@
+class=application.Vache
+nom=Marguerite
+age=2
+race=limousine
+type=laitiere
+nourri=true
