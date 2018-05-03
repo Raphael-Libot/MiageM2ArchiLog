@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import application.IAfficheur;
+import application.IModifierVache;
 import application.Vache;
 import plugins.ChargementVaches;
 import plugins.DefaultAfficheur;
@@ -19,6 +20,7 @@ public class Loader {
 	
 	private static List<DescripteurPlugin> listDescriptionPlugin = new ArrayList<>();
 	private static IAfficheur afficheur;
+	private static IModifierVache modifieur;
 	private static Loader instance = new Loader();
 	private static DefaultWindows fenetre;
 	private static Vache vache;
@@ -38,7 +40,7 @@ public class Loader {
 		fenetre = new DefaultWindows();
 		
 		for(DescripteurPlugin d : listDescriptionPlugin) {
-			fenetre.ajoutBoutonAfficheur(d.getNomClasse());
+			fenetre.ajoutBoutonAfficheur(d);
 		}
 		
 		fenetre.display();
@@ -54,6 +56,15 @@ public class Loader {
 			if(d.getNomClasse().equals(nom)){
 				afficheur = (IAfficheur) Class.forName(d.getNomClasse()).newInstance();
 				fenetre.afficherVache(afficheur.afficher(vache));
+			}
+		}
+	}
+	
+	public static void modifierVache(String nomClasse, String nomVache) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		for(DescripteurPlugin d : listDescriptionPlugin) {
+			if(d.getNomClasse().equals(nomClasse)){
+				modifieur = (IModifierVache) Class.forName(d.getNomClasse()).newInstance();
+				fenetre.modifierVache(modifieur.modifierNom(vache, nomVache));
 			}
 		}
 	}

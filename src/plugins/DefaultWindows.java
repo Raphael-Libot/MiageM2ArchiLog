@@ -6,13 +6,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+import application.Vache;
+import loader.DescripteurPlugin;
 import loader.Loader;
 
 public class DefaultWindows extends JFrame {
@@ -22,6 +24,7 @@ public class DefaultWindows extends JFrame {
 
 	JPanel panelAfficheur;
 	JTextArea afficheur;
+	JTextField toto;
 	
 	public DefaultWindows(){
 		
@@ -33,12 +36,21 @@ public class DefaultWindows extends JFrame {
 		this.setVisible(true);
 	}
 
-	public void ajoutBoutonAfficheur(String nom) {
-		JToggleButton button = new JToggleButton(nom);
+	public void ajoutBoutonAfficheur(DescripteurPlugin descPlugin) {
+		JToggleButton button = new JToggleButton(descPlugin.getNomClasse());
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Loader.changementAfficheur(nom);
+					switch(descPlugin.getImplementedInterface()) {
+						case "IAfficheur" : 
+							Loader.changementAfficheur(descPlugin.getNomClasse());
+							break;
+						case "IModifierVache" : Loader.modifierVache(descPlugin.getNomClasse(), "Toto");
+							break;
+						default:
+							break;
+					}
+					
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -73,6 +85,11 @@ public class DefaultWindows extends JFrame {
 	
 	public void afficherVache(final String vache){
 		this.afficheur.setText(vache);
+	}
+	
+	public void modifierVache(Vache vache) {
+		this.toto = new JTextField(10);
+		this.afficheur.setText("Le nouveau nom de la vache est : " + vache.getNom());
 	}
 	
 }
