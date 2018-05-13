@@ -1,5 +1,9 @@
 package application;
 
+/**
+ * Objet metier de l'application
+ *
+ */
 public class Vache {
 
 	private String nom;

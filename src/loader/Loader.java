@@ -4,11 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import javax.swing.JOptionPane;
 
 import application.IAfficheur;
 import application.IModifierVache;
@@ -17,7 +16,10 @@ import plugins.ChargementVaches;
 import plugins.DefaultAfficheur;
 import plugins.DefaultWindows;
 
-
+/**
+ * Classe principale de l application
+ *
+ */
 public class Loader {
 	
 	private static List<DescripteurPlugin> listDescriptionPlugin = new ArrayList<>();
@@ -33,22 +35,28 @@ public class Loader {
 	
 	public static void main(String[] args) throws IllegalAccessException, InstantiationException, FileNotFoundException, IOException {
 
+		//cration afficheur par defaut
 		afficheur = new DefaultAfficheur();
 		
+		//chargement de l'ensemble des plugins (fichier .properties)
 		listDescriptionPlugin = chargementPlugins();
-		vache = (Vache) ChargementVaches.chargementVaches();
-		System.out.println(vache.toString());
 		
+		//chargement des attribut part defaut de la vache present dans un fichier text
+		vache = (Vache) ChargementVaches.chargementVaches();
+
+		//chargement de l interface graphique
 		fenetre = new DefaultWindows();
 		
+		//ajout des l ensemble des boutons pours les plugins 
 		for(DescripteurPlugin d : listDescriptionPlugin) {
 			fenetre.ajoutBoutonAfficheur(d);
 		}
 		
+		//affichage de l interface
 		fenetre.display();
 		
+		//afficahge de la vacha a l aide de l afficheur par defaut
 		fenetre.afficherVache(afficheur.afficher(vache));
-		
 
     }
 	
@@ -63,10 +71,31 @@ public class Loader {
 	}
 	
 	public static void modifierVache(String nomClasse, String Attribut, String nomVache) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		//parcour de l'ensemble des descipteurs
 		for(DescripteurPlugin d : listDescriptionPlugin) {
+			
+			// descripteur que nous voulons utiliser, attribut a modifier
 			if(d.getNomClasse().equals(nomClasse) && ((DescripteurPluginModifier) d).getAttAModifier() == Attribut){
+				
+				//recupration du modifieur de donnees de la vache
 				modifieur = (IModifierVache) Class.forName(d.getNomClasse()).newInstance();
-				fenetre.modifierVache(modifieur.modifier(vache, ((DescripteurPluginModifier) d).getAttAModifier(), nomVache));
+				
+				try {
+					//affichage de la modification des donnes
+					fenetre.modifierVache(
+							
+							//modification des donnes
+							modifieur.modifier(vache, ((DescripteurPluginModifier) d).getAttAModifier(), nomVache),
+							
+							//attribut qui a ete modifie
+							((DescripteurPluginModifier) d).getAttAModifier()
+							
+							);
+					
+				} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+						| SecurityException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -95,38 +124,7 @@ public class Loader {
 			default:
 				break;
 		}
-			
-			
 		}
 		return listePLugin;
 	}
-
-	
-	/**
-	 * Permet le chargement des plugins d'un type donné soécifique
-	 * @return
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	private static List<DescripteurPlugin> loadPluginsType(Class<?> clas) throws FileNotFoundException, IOException{
-		List<DescripteurPlugin> listePLugin = new ArrayList<>();
-		File dossierPlugin = new File(System.getProperty("user.dir") + File.separator + "Plugins");
-		File[] listeFichierPlugin = dossierPlugin.listFiles();
-		for(File fichier : listeFichierPlugin){
-			Properties properties = new Properties();
-			properties.load(new FileInputStream(fichier.getAbsolutePath()));
-			// TO-DO pour le moement c'est merdique mais c'est temporaire, car la je check le nom de la class mais c'est plus le type 
-			if(properties.getProperty("interface").equals(clas.getName())){
-				listePLugin.add(new DescripteurPlugin(properties.getProperty("nom"), properties.getProperty("class"), properties.getProperty("interface")));
-			}
-		}
-		return null;
-	}
-
-	public static IAfficheur getAfficheur() {
-		return afficheur;
-	}
-
-
-	
 }

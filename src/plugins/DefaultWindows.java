@@ -3,6 +3,7 @@ package plugins;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -91,9 +92,8 @@ public class DefaultWindows extends JFrame {
 		this.afficheur.setText(vache);
 	}
 	
-	public void modifierVache(Vache vache) {
-		this.toto = new JTextField(10);
-		this.afficheur.setText("Le nouveau nom de la vache est : " + vache.getNom());
+	public void modifierVache(Vache vache, String attribut) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		this.afficheur.setText( attribut+" de la vache devient : " + vache.getClass().getMethod("get"+attribut.substring(0, 1).toUpperCase() + attribut.substring(1)).invoke(vache));
 	}
 	
 }

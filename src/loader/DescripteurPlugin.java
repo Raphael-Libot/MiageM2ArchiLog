@@ -1,5 +1,9 @@
 package loader;
 
+/**
+ * Descripteur des plugins simples
+ *
+ */
 public class DescripteurPlugin {
 	
 	private String nom;

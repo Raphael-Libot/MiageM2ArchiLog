@@ -1,5 +1,10 @@
 package loader;
 
+/**
+ * Descripteur des plugins permettant la modification
+ * Presence de l attribut de la vache qui sera modifie par le plugin
+ *
+ */
 public class DescripteurPluginModifier extends DescripteurPlugin {
 
 	private String AttAModifier;

@@ -3,6 +3,10 @@ package plugins;
 import application.IAfficheur;
 import application.Vache;
 
+/**
+ * Afficheur plus develope 
+ *
+ */
 public class SimpleCustomAfficheur implements IAfficheur {
 
 	@Override

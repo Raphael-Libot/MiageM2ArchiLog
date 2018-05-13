@@ -3,6 +3,10 @@ package plugins;
 import application.IAfficheur;
 import application.Vache;
 
+/**
+ * Afficheur basique
+ *
+ */
 public class DefaultAfficheur implements IAfficheur{
 
 	@Override
