@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -15,6 +16,7 @@ import javax.swing.JToggleButton;
 
 import application.Vache;
 import loader.DescripteurPlugin;
+import loader.DescripteurPluginModifier;
 import loader.Loader;
 
 public class DefaultWindows extends JFrame {
@@ -37,7 +39,7 @@ public class DefaultWindows extends JFrame {
 	}
 
 	public void ajoutBoutonAfficheur(DescripteurPlugin descPlugin) {
-		JToggleButton button = new JToggleButton(descPlugin.getNomClasse());
+		JToggleButton button = new JToggleButton(descPlugin.getNom());
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -45,7 +47,9 @@ public class DefaultWindows extends JFrame {
 						case "IAfficheur" : 
 							Loader.changementAfficheur(descPlugin.getNomClasse());
 							break;
-						case "IModifierVache" : Loader.modifierVache(descPlugin.getNomClasse(), "Toto");
+						case "IModifierVache" : Loader.modifierVache(descPlugin.getNomClasse(), ((DescripteurPluginModifier) descPlugin).getAttAModifier() , ((String)JOptionPane.showInputDialog(
+			                    "Changement de : " + ((DescripteurPluginModifier) descPlugin).getAttAModifier() ,
+			                    null)));
 							break;
 						default:
 							break;

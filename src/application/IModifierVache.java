@@ -1,5 +1,7 @@
 package application;
 
 public interface IModifierVache {
-	public Vache modifierNom(Vache vache, String nouveauNom);
+	
+	public Vache modifier(Vache vache, String attribut, String nouveauNom);
+	
 }

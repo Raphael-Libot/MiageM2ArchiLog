@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.swing.JOptionPane;
+
 import application.IAfficheur;
 import application.IModifierVache;
 import application.Vache;
@@ -60,11 +62,11 @@ public class Loader {
 		}
 	}
 	
-	public static void modifierVache(String nomClasse, String nomVache) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+	public static void modifierVache(String nomClasse, String Attribut, String nomVache) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		for(DescripteurPlugin d : listDescriptionPlugin) {
-			if(d.getNomClasse().equals(nomClasse)){
+			if(d.getNomClasse().equals(nomClasse) && ((DescripteurPluginModifier) d).getAttAModifier() == Attribut){
 				modifieur = (IModifierVache) Class.forName(d.getNomClasse()).newInstance();
-				fenetre.modifierVache(modifieur.modifierNom(vache, nomVache));
+				fenetre.modifierVache(modifieur.modifier(vache, ((DescripteurPluginModifier) d).getAttAModifier(), nomVache));
 			}
 		}
 	}
@@ -82,7 +84,19 @@ public class Loader {
 		for(File fichier : listeFichierPlugin){
 			Properties properties = new Properties();
 			properties.load(new FileInputStream(fichier.getAbsolutePath()));
-			listePLugin.add(new DescripteurPlugin(properties.getProperty("class"), properties.getProperty("interface")));
+			
+			switch(properties.getProperty("interface")) {
+			case "IAfficheur" : 
+				listePLugin.add(new DescripteurPlugin(properties.getProperty("nom"), properties.getProperty("class"), properties.getProperty("interface")));
+				break;
+			case "IModifierVache" : 
+				listePLugin.add(new DescripteurPluginModifier(properties.getProperty("nom"), properties.getProperty("class"), properties.getProperty("interface"), properties.getProperty("attribut")));
+				break;
+			default:
+				break;
+		}
+			
+			
 		}
 		return listePLugin;
 	}
@@ -103,7 +117,7 @@ public class Loader {
 			properties.load(new FileInputStream(fichier.getAbsolutePath()));
 			// TO-DO pour le moement c'est merdique mais c'est temporaire, car la je check le nom de la class mais c'est plus le type 
 			if(properties.getProperty("interface").equals(clas.getName())){
-				listePLugin.add(new DescripteurPlugin(properties.getProperty("class"), properties.getProperty("interface")));
+				listePLugin.add(new DescripteurPlugin(properties.getProperty("nom"), properties.getProperty("class"), properties.getProperty("interface")));
 			}
 		}
 		return null;
