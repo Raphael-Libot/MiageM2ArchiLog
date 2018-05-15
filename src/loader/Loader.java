@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Properties;
 
 import application.IAfficheur;
+import application.IChargeurVache;
 import application.IModifierVache;
 import application.Vache;
-import plugins.ChargementVaches;
 import plugins.DefaultAfficheur;
-import plugins.DefaultWindows;
 
 /**
  * Classe principale de l application
@@ -25,6 +24,7 @@ public class Loader {
 	private static List<DescripteurPlugin> listDescriptionPlugin = new ArrayList<>();
 	private static IAfficheur afficheur;
 	private static IModifierVache modifieur;
+	private static IChargeurVache chargeur;
 	private static Loader instance = new Loader();
 	private static DefaultWindows fenetre;
 	private static Vache vache;
@@ -40,9 +40,6 @@ public class Loader {
 		
 		//chargement de l'ensemble des plugins (fichier .properties)
 		listDescriptionPlugin = chargementPlugins();
-		
-		//chargement des attribut part defaut de la vache present dans un fichier text
-		vache = (Vache) ChargementVaches.chargementVaches();
 
 		//chargement de l interface graphique
 		fenetre = new DefaultWindows();
@@ -56,10 +53,19 @@ public class Loader {
 		fenetre.display();
 		
 		//afficahge de la vacha a l aide de l afficheur par defaut
-		fenetre.afficherVache(afficheur.afficher(vache));
+		fenetre.afficherVache("La vache de votre application n'est pas chargée");
 
     }
 	
+	public static void charger(String nom) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		for(DescripteurPlugin d : listDescriptionPlugin) {
+			if(d.getNomClasse().equals(nom)){
+				chargeur = (IChargeurVache) Class.forName(d.getNomClasse()).newInstance();
+				vache = (Vache) chargeur.chargementVache();
+				fenetre.afficherVache(afficheur.afficher(vache));
+			}
+		}
+	}
 	
 	public static void changementAfficheur(String nom) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		for(DescripteurPlugin d : listDescriptionPlugin) {
@@ -116,6 +122,9 @@ public class Loader {
 			
 			switch(properties.getProperty("interface")) {
 			case "IAfficheur" : 
+				listePLugin.add(new DescripteurPlugin(properties.getProperty("nom"), properties.getProperty("class"), properties.getProperty("interface")));
+				break;
+			case "IChargeurVache" : 
 				listePLugin.add(new DescripteurPlugin(properties.getProperty("nom"), properties.getProperty("class"), properties.getProperty("interface")));
 				break;
 			case "IModifierVache" : 

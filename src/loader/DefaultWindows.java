@@ -1,4 +1,4 @@
-package plugins;
+package loader;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -16,9 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import application.Vache;
-import loader.DescripteurPlugin;
-import loader.DescripteurPluginModifier;
-import loader.Loader;
 
 public class DefaultWindows extends JFrame {
 
@@ -52,6 +49,9 @@ public class DefaultWindows extends JFrame {
 			                    "Changement de : " + ((DescripteurPluginModifier) descPlugin).getAttAModifier() ,
 			                    null)));
 							break;
+						case "IChargeurVache" :
+							Loader.charger(descPlugin.getNomClasse());
+							break;
 						default:
 							break;
 					}
@@ -80,7 +80,7 @@ public class DefaultWindows extends JFrame {
 		this.blockButtonBehavior.add(new JLabel("Afficheur : "));
 		
 		this.panelAfficheur = new JPanel();
-		this.afficheur = new JTextArea("coucou");
+		this.afficheur = new JTextArea("");
 		
 		this.panelAfficheur.add(afficheur);
 		
