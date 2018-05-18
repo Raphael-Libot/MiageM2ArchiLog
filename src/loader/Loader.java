@@ -53,7 +53,7 @@ public class Loader {
 		fenetre.display();
 		
 		//afficahge de la vacha a l aide de l afficheur par defaut
-		fenetre.afficherVache("La vache de votre application n'est pas chargée");
+		fenetre.afficherVache("La vache de votre application n'est pas chargÃ©e");
 
     }
 	

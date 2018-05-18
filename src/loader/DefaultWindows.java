@@ -1,6 +1,7 @@
 package loader;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
@@ -11,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -21,6 +23,8 @@ public class DefaultWindows extends JFrame {
 
 	JPanel blockButtonBehavior;
 	ButtonGroup toggleBlockButtonBehavior;
+	
+	JScrollPane scrollPanel;
 
 	JPanel panelAfficheur;
 	JTextArea afficheur;
@@ -83,8 +87,13 @@ public class DefaultWindows extends JFrame {
 		this.afficheur = new JTextArea("");
 		
 		this.panelAfficheur.add(afficheur);
+		scrollPanel = new JScrollPane(blockButtonBehavior);
+		scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPanel.setPreferredSize(new Dimension(50, 50));
+        scrollPanel.setBounds(50, 50, 350, 50);
 		
-		this.add(blockButtonBehavior, BorderLayout.NORTH);
+		
+		this.add(scrollPanel, BorderLayout.NORTH);
 		this.add(panelAfficheur, BorderLayout.CENTER);
 	}
 	
