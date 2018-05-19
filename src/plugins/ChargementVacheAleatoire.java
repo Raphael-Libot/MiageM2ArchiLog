@@ -13,7 +13,7 @@ public class ChargementVacheAleatoire implements IChargeurVache {
 	public Vache chargementVache() {
 		List<String> listeNom = new ArrayList<String>();
 		listeNom.add("Rose");
-		listeNom.add("Azalée");
+		listeNom.add("AzalÃ©e");
 		listeNom.add("Paquerette");
 		listeNom.add("Princesse");
 		listeNom.add("Marguerite");
@@ -26,7 +26,7 @@ public class ChargementVacheAleatoire implements IChargeurVache {
 		listeRace.add("Holstein");
 		
 		List<String> listeType = new ArrayList<String>();
-		listeType.add("Laitière");
+		listeType.add("LaitiÃ¨re");
 		listeType.add("A viande");
 		
 		return new Vache( 

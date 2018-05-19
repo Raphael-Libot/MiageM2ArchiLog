@@ -44,6 +44,7 @@ public class DefaultWindows extends JFrame {
 
 	public DefaultWindows() {
 
+
 		initComponents();
 
 	}
@@ -98,7 +99,6 @@ public class DefaultWindows extends JFrame {
 		default:
 			break;
 		}
-
 	}
 
 	public void afficherVache(final String vache) {
