@@ -87,7 +87,7 @@ public class DefaultWindows extends JFrame {
 		
 		switch (descPlugin.getImplementedInterface()) {
 		case "IAfficheur":
-			this.jLabel3.add(button);
+			this.blockButtonDisplay.add(button);
 			this.toggleBlockButtonDisplay.add(button);
 			break;
 		case "IModifierVache":
@@ -162,9 +162,8 @@ public class DefaultWindows extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-this.toggleBlockButtonLoader = new ButtonGroup();
-this.toggleBlockButtonBehavior = new ButtonGroup();
-this.toggleBlockButtonDisplay = new ButtonGroup();
+
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Tamagovache");
@@ -185,19 +184,19 @@ this.toggleBlockButtonDisplay = new ButtonGroup();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        this.blockButtonLaoder.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        this.blockButtonDisplay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+//        this.blockButtonLaoder.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+//        this.blockButtonDisplay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+//        this.blockButtonBehavior.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         
-//        javax.swing.GroupLayout blockButtonLoaderLayout = new javax.swing.GroupLayout(this.blockButtonBehavior);
-//        this.blockButtonBehavior.setLayout(blockButtonLoaderLayout);
-//        blockButtonLoaderLayout.setHorizontalGroup(
-//            blockButtonLoaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGap(0, 0, Short.MAX_VALUE)
-//        );
-//        blockButtonLoaderLayout.setVerticalGroup(
-//            blockButtonLoaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGap(0, 60, Short.MAX_VALUE)
-//        );
+        this.blockButtonLaoder.setLayout(new BoxLayout(this.blockButtonLaoder, BoxLayout.LINE_AXIS));
+        this.blockButtonDisplay.setLayout(new BoxLayout(this.blockButtonDisplay, BoxLayout.LINE_AXIS));
+        this.blockButtonBehavior.setLayout(new BoxLayout(this.blockButtonBehavior, BoxLayout.LINE_AXIS));
+        
+        
+        this.toggleBlockButtonLoader = new ButtonGroup();
+        this.toggleBlockButtonBehavior = new ButtonGroup();
+        this.toggleBlockButtonDisplay = new ButtonGroup();
+
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Plugin de Chargement et modification :");
@@ -210,7 +209,7 @@ this.toggleBlockButtonDisplay = new ButtonGroup();
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(this.blockButtonLaoder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(this.blockButtonLaoder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,16 +249,7 @@ this.toggleBlockButtonDisplay = new ButtonGroup();
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Plugins de afficheurs :");
 
-//        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(blockButtonDisplay);
-//        blockButtonDisplay.setLayout(jPanel3Layout);
-//        jPanel3Layout.setHorizontalGroup(
-//            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGap(0, 0, Short.MAX_VALUE)
-//        );
-//        jPanel3Layout.setVerticalGroup(
-//            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGap(0, 0, Short.MAX_VALUE)
-//        );
+
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -269,7 +259,7 @@ this.toggleBlockButtonDisplay = new ButtonGroup();
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(blockButtonDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(blockButtonDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -277,7 +267,7 @@ this.toggleBlockButtonDisplay = new ButtonGroup();
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(blockButtonDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(blockButtonDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 61, Short.MAX_VALUE)))
@@ -289,16 +279,7 @@ this.toggleBlockButtonDisplay = new ButtonGroup();
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Plugins comportements :");
 
-//        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(blockButtonBehavior);
-//        blockButtonBehavior.setLayout(jPanel7Layout);
-//        jPanel7Layout.setHorizontalGroup(
-//            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGap(0, 0, Short.MAX_VALUE)
-//        );
-//        jPanel7Layout.setVerticalGroup(
-//            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGap(0, 86, Short.MAX_VALUE)
-//        );
+
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -308,7 +289,7 @@ this.toggleBlockButtonDisplay = new ButtonGroup();
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(blockButtonBehavior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(blockButtonBehavior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
