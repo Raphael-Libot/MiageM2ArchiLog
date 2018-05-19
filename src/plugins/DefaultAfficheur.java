@@ -11,7 +11,11 @@ public class DefaultAfficheur implements IAfficheur{
 
 	@Override
 	public String afficher(Vache vache) {
-		return vache.toString();
+		if(vache!=null) {
+			return vache.toString();
+		}else{
+			return "Vous n'avez pas chargé de vache";
+		}
 	};
 	
 }

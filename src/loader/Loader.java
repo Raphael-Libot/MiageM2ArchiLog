@@ -77,33 +77,40 @@ public class Loader {
 	}
 	
 	public static void modifierVache(String nomClasse, String Attribut, String nomVache) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
-		//parcour de l'ensemble des descipteurs
-		for(DescripteurPlugin d : listDescriptionPlugin) {
-			
-			// descripteur que nous voulons utiliser, attribut a modifier
-			if(d.getNomClasse().equals(nomClasse) && ((DescripteurPluginModifier) d).getAttAModifier() == Attribut){
+		
+		if(vache != null) {
+			//parcour de l'ensemble des descipteurs
+			for(DescripteurPlugin d : listDescriptionPlugin) {
 				
-				//recupration du modifieur de donnees de la vache
-				modifieur = (IModifierVache) Class.forName(d.getNomClasse()).newInstance();
-				
-				try {
-					//affichage de la modification des donnes
-					fenetre.modifierVache(
-							
-							//modification des donnes
-							modifieur.modifier(vache, ((DescripteurPluginModifier) d).getAttAModifier(), nomVache),
-							
-							//attribut qui a ete modifie
-							((DescripteurPluginModifier) d).getAttAModifier()
-							
-							);
+				// descripteur que nous voulons utiliser, attribut a modifier
+				if(d.getNomClasse().equals(nomClasse) && ((DescripteurPluginModifier) d).getAttAModifier() == Attribut){
 					
-				} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-						| SecurityException e) {
-					e.printStackTrace();
+					//recupration du modifieur de donnees de la vache
+					modifieur = (IModifierVache) Class.forName(d.getNomClasse()).newInstance();
+					
+					try {
+						//affichage de la modification des donnes
+						fenetre.modifierVache(
+								
+								//modification des donnes
+								modifieur.modifier(vache, ((DescripteurPluginModifier) d).getAttAModifier(), nomVache),
+								
+								//attribut qui a ete modifie
+								((DescripteurPluginModifier) d).getAttAModifier()
+								
+								);
+						
+					} catch (IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+							| SecurityException e) {
+						e.printStackTrace();
+					}
 				}
 			}
+		} else {
+			fenetre.afficherVache(afficheur.afficher(vache));
 		}
+		
+		
 	}
 	
 	/**
