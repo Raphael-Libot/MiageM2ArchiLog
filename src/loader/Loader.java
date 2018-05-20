@@ -8,9 +8,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.lang.reflect.Method;
 
 import application.IAfficheur;
 import application.IChargeurVache;
+import application.IComportement;
 import application.IModifierVache;
 import application.Vache;
 import plugins.DefaultAfficheur;
@@ -77,7 +79,6 @@ public class Loader {
 	}
 	
 	public static void modifierVache(String nomClasse, String Attribut, String nomVache) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
-		
 		if(vache != null) {
 			//parcour de l'ensemble des descipteurs
 			for(DescripteurPlugin d : listDescriptionPlugin) {
@@ -109,8 +110,28 @@ public class Loader {
 		} else {
 			fenetre.afficherVache(afficheur.afficher(vache));
 		}
-		
-		
+	}
+	
+	public static void comportement(String nomClasse, String nomMethode) {
+
+		IComportement comportement;
+		Method methode;
+
+		if (vache != null) {
+			for (DescripteurPlugin d : listDescriptionPlugin) {
+				if (d.getNomClasse().equals(nomClasse) && ((DescripteurPluginComportement) d).getMethode() == nomMethode) {
+					try {
+						comportement = (IComportement) Class.forName(d.getNomClasse()).newInstance();
+						methode = comportement.getClass().getMethod(((DescripteurPluginComportement) d).getMethode(),Vache.class);
+						fenetre.afficherText((String) methode.invoke(comportement, vache));
+					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | InstantiationException | ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		} else {
+			fenetre.afficherVache(afficheur.afficher(vache));
+		}
 	}
 	
 	/**
@@ -137,6 +158,8 @@ public class Loader {
 			case "IModifierVache" : 
 				listePLugin.add(new DescripteurPluginModifier(properties.getProperty("nom"), properties.getProperty("class"), properties.getProperty("interface"), properties.getProperty("attribut")));
 				break;
+			case "IComportement" :
+				listePLugin.add(new DescripteurPluginComportement(properties.getProperty("nom"), properties.getProperty("class"), properties.getProperty("interface"), properties.getProperty("methode")));  
 			default:
 				break;
 		}

@@ -72,6 +72,8 @@ public class DefaultWindows extends JFrame {
 					case "IChargeurVache":
 						Loader.charger(descPlugin.getNomClasse());
 						break;
+					case "IComportement":
+						Loader.comportement(descPlugin.getNomClasse(), ((DescripteurPluginComportement) descPlugin).getMethode());
 					default:
 						break;
 					}
@@ -96,11 +98,19 @@ public class DefaultWindows extends JFrame {
 			this.blockButtonLaoder.add(button);
 			this.toggleBlockButtonLoader.add(button);
 			break;
+		case "IComportement":
+			this.blockButtonBehavior.add(button);
+			this.toggleBlockButtonBehavior.add(button);
+			break;
 		default:
 			break;
 		}
 	}
 
+	public void afficherText(final String texte) {
+		this.afficheur.setText(texte);
+	}
+	
 	public void afficherVache(final String vache) {
 		this.afficheur.setText(vache);
 	}
@@ -229,12 +239,12 @@ public class DefaultWindows extends JFrame {
 		Titrecomportement.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		Titrecomportement.setText("Plugins comportements :");
 
-		javax.swing.GroupLayout blockButtonBehaviorLayout = new javax.swing.GroupLayout(blockButtonBehavior);
-		blockButtonBehavior.setLayout(blockButtonBehaviorLayout);
-		blockButtonBehaviorLayout.setHorizontalGroup(blockButtonBehaviorLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
-		blockButtonBehaviorLayout.setVerticalGroup(blockButtonBehaviorLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 47, Short.MAX_VALUE));
+//		javax.swing.GroupLayout blockButtonBehaviorLayout = new javax.swing.GroupLayout(blockButtonBehavior);
+//		blockButtonBehavior.setLayout(blockButtonBehaviorLayout);
+//		blockButtonBehaviorLayout.setHorizontalGroup(blockButtonBehaviorLayout
+//				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
+//		blockButtonBehaviorLayout.setVerticalGroup(blockButtonBehaviorLayout
+//				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 47, Short.MAX_VALUE));
 
 		javax.swing.GroupLayout zoneBehaviourLayout = new javax.swing.GroupLayout(zoneBehaviour);
 		zoneBehaviour.setLayout(zoneBehaviourLayout);

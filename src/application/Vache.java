@@ -14,26 +14,37 @@ public class Vache {
 
 	private String type;
 	
-	private boolean nourri;
+	private boolean amange;
+	
+	private boolean abu;
+	
+	private boolean ajouee;
+	
+	private boolean adormi;
+	
+	private boolean acourue;
 	
 	public Vache() {
 	}
 
-	public Vache(String nom, int age, String race, String type, boolean nourri) {
-		super();
+	public Vache(String nom, int age, String race, String type, boolean amange, boolean abu, boolean ajouee, boolean adormi, boolean acourue) {
 		this.nom = nom;
 		this.age = age;
 		this.race = race;
 		this.type = type;
-		this.nourri = nourri;
+		this.amange = amange;
+		this.abu = abu;
+		this.ajouee = ajouee;
+		this.adormi = adormi;
+		this.acourue = acourue;
 	}
 	
+
 	@Override
 	public String toString() {
-		return "Vache [nom=" + nom + ", age=" + age + ", race=" + race + ", type=" + type + ", nourri=" + nourri + "]";
+		return "Vache [nom=" + nom + ", age=" + age + ", race=" + race + ", type=" + type + ", amange=" + amange
+				+ ", abu=" + abu + ", ajouee=" + ajouee + ", adormi=" + adormi + ", acourue=" + acourue + "]";
 	}
-
-
 
 	public String getNom() {
 		return nom;
@@ -67,13 +78,47 @@ public class Vache {
 		this.type = type;
 	}
 
-	public boolean isNourri() {
-		return nourri;
+	public boolean isAmange() {
+		return amange;
 	}
 
-	public void setNourri(boolean nourri) {
-		this.nourri = nourri;
+	public void setAmange(boolean amange) {
+		this.amange = amange;
 	}
+
+	public boolean isAbu() {
+		return abu;
+	}
+
+	public void setAbu(boolean abu) {
+		this.abu = abu;
+	}
+
+	public boolean isAjouee() {
+		return ajouee;
+	}
+
+	public void setAjouee(boolean ajouee) {
+		this.ajouee = ajouee;
+	}
+
+	public boolean isAdormi() {
+		return adormi;
+	}
+
+	public void setAdormi(boolean adormi) {
+		this.adormi = adormi;
+	}
+
+	public boolean isAcourue() {
+		return acourue;
+	}
+
+	public void setAcourue(boolean acourue) {
+		this.acourue = acourue;
+	}
+
+
 	
 	
 

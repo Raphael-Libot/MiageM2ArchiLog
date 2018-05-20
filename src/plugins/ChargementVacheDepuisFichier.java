@@ -33,7 +33,7 @@ public class ChargementVacheDepuisFichier implements IChargeurVache {
 
 			// recuperation du constructeur de la classe vache
 			 Constructor<?> constructeur = vache.getClass().getConstructor(String.class, int.class, String.class, String.class,
-					boolean.class);
+					 boolean.class,boolean.class,boolean.class,boolean.class,boolean.class);
 
 			// constrction de la vache
 			vache = constructeur.newInstance( //
@@ -41,7 +41,12 @@ public class ChargementVacheDepuisFichier implements IChargeurVache {
 					Integer.valueOf((String) properties.get("age")), //
 					properties.get("type").toString(), //
 					properties.get("race").toString(), //
-					Boolean.valueOf((String) properties.get("nourri")));
+					Boolean.valueOf((String) properties.get("amange")), //
+					Boolean.valueOf((String) properties.get("abu")), //
+					Boolean.valueOf((String) properties.get("ajouee")), //
+					Boolean.valueOf((String) properties.get("adormi")), //
+					Boolean.valueOf((String) properties.get("acourue")) //
+			);
 
 		} catch (NoSuchMethodException | IOException | ClassNotFoundException | InstantiationException
 				| IllegalAccessException | SecurityException | IllegalArgumentException | InvocationTargetException e) {

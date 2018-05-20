@@ -34,6 +34,10 @@ public class ChargementVacheAleatoire implements IChargeurVache {
 				ThreadLocalRandom.current().nextInt(1, 22 + 1),
 				listeRace.get(ThreadLocalRandom.current().nextInt(0, 4 + 1)),
 				listeType.get(ThreadLocalRandom.current().nextInt(0, 1 + 1)),
+				false,
+				true,
+				true,
+				false,
 				true);
 	}
 
