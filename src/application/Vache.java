@@ -78,7 +78,7 @@ public class Vache {
 		this.type = type;
 	}
 
-	public boolean isAmange() {
+	public boolean getAmange() {
 		return amange;
 	}
 
@@ -86,7 +86,7 @@ public class Vache {
 		this.amange = amange;
 	}
 
-	public boolean isAbu() {
+	public boolean getAbu() {
 		return abu;
 	}
 
@@ -94,7 +94,7 @@ public class Vache {
 		this.abu = abu;
 	}
 
-	public boolean isAjouee() {
+	public boolean getAjouee() {
 		return ajouee;
 	}
 
@@ -102,7 +102,7 @@ public class Vache {
 		this.ajouee = ajouee;
 	}
 
-	public boolean isAdormi() {
+	public boolean getAdormi() {
 		return adormi;
 	}
 
@@ -110,7 +110,7 @@ public class Vache {
 		this.adormi = adormi;
 	}
 
-	public boolean isAcourue() {
+	public boolean getAcourue() {
 		return acourue;
 	}
 

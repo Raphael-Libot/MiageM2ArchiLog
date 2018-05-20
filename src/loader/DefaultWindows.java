@@ -38,9 +38,14 @@ public class DefaultWindows extends JFrame {
 	JPanel zoneLoader;
 	JPanel zoneTitre;
 
+	JPanel zoneModifier;
+	JLabel titreModifier;
+	JPanel blockButtonModifier;
+
 	ButtonGroup toggleBlockButtonDisplay;
 	ButtonGroup toggleBlockButtonBehavior;
 	ButtonGroup toggleBlockButtonLoader;
+	ButtonGroup toggleBlockButtonModifier;
 
 	public DefaultWindows() {
 
@@ -91,8 +96,8 @@ public class DefaultWindows extends JFrame {
 			this.toggleBlockButtonDisplay.add(button);
 			break;
 		case "IModifierVache":
-			this.blockButtonLaoder.add(button);
-			this.toggleBlockButtonLoader.add(button);
+			this.blockButtonModifier.add(button);
+			this.toggleBlockButtonModifier.add(button);
 			break;
 		case "IChargeurVache":
 			this.blockButtonLaoder.add(button);
@@ -138,10 +143,15 @@ public class DefaultWindows extends JFrame {
 		zoneBehaviour = new javax.swing.JPanel();
 		Titrecomportement = new javax.swing.JLabel();
 		blockButtonBehavior = new javax.swing.JPanel();
+		
+		zoneModifier = new JPanel();
+		titreModifier = new javax.swing.JLabel();
+		blockButtonModifier = new javax.swing.JPanel();
 
 		this.toggleBlockButtonLoader = new ButtonGroup();
 		this.toggleBlockButtonBehavior = new ButtonGroup();
 		this.toggleBlockButtonDisplay = new ButtonGroup();
+		this.toggleBlockButtonModifier = new ButtonGroup();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -186,6 +196,38 @@ public class DefaultWindows extends JFrame {
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(51, 51, 51)));
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		titreModifier.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		titreModifier.setText("Plugins de modification :");
+		
+		
+		zoneModifier.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+		javax.swing.GroupLayout zoneModifierLayout = new javax.swing.GroupLayout(zoneModifier);
+		zoneModifier.setLayout(zoneModifierLayout);
+		zoneModifierLayout.setHorizontalGroup(zoneModifierLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(zoneModifierLayout.createSequentialGroup().addContainerGap()
+						.addGroup(zoneModifierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(zoneModifierLayout.createSequentialGroup().addComponent(titreModifier)
+										.addContainerGap(866, Short.MAX_VALUE))
+								.addComponent(blockButtonModifier, javax.swing.GroupLayout.Alignment.TRAILING,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE))));
+		zoneModifierLayout
+				.setVerticalGroup(zoneModifierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, zoneModifierLayout.createSequentialGroup()
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(titreModifier).addGap(7, 7, 7)
+								.addComponent(blockButtonModifier, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(51, 51, 51)));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
 		zoneAffichage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
 		afficheur.setColumns(20);
@@ -203,7 +245,7 @@ public class DefaultWindows extends JFrame {
 		zoneAffichageLayout.setVerticalGroup(zoneAffichageLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(zoneAffichageLayout.createSequentialGroup().addContainerGap()
-						.addComponent(Scrolafficheur, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+						.addComponent(Scrolafficheur, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
 						.addContainerGap()));
 
 		zoneDisplay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -239,13 +281,6 @@ public class DefaultWindows extends JFrame {
 		Titrecomportement.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		Titrecomportement.setText("Plugins comportements :");
 
-//		javax.swing.GroupLayout blockButtonBehaviorLayout = new javax.swing.GroupLayout(blockButtonBehavior);
-//		blockButtonBehavior.setLayout(blockButtonBehaviorLayout);
-//		blockButtonBehaviorLayout.setHorizontalGroup(blockButtonBehaviorLayout
-//				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
-//		blockButtonBehaviorLayout.setVerticalGroup(blockButtonBehaviorLayout
-//				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 47, Short.MAX_VALUE));
-
 		javax.swing.GroupLayout zoneBehaviourLayout = new javax.swing.GroupLayout(zoneBehaviour);
 		zoneBehaviour.setLayout(zoneBehaviourLayout);
 		zoneBehaviourLayout.setHorizontalGroup(zoneBehaviourLayout
@@ -280,6 +315,8 @@ public class DefaultWindows extends JFrame {
 								.addComponent(zoneDisplay, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(zoneBehaviour, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(zoneModifier, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addContainerGap())
 				.addGroup(
@@ -302,6 +339,9 @@ public class DefaultWindows extends JFrame {
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(zoneBehaviour, javax.swing.GroupLayout.PREFERRED_SIZE,
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(zoneModifier, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(74, 74, 74))
 				.addGroup(panelGloblaeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(panelGloblaeLayout.createSequentialGroup().addGap(137, 137, 137)
@@ -321,7 +361,7 @@ public class DefaultWindows extends JFrame {
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(0, 0, Short.MAX_VALUE))));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 629, Short.MAX_VALUE)
+				.addGap(0, 700, Short.MAX_VALUE)
 				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
 								.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,

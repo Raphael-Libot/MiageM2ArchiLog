@@ -11,22 +11,41 @@ import application.Vache;
  *
  */
 public class ModifierVache implements IModifierVache {
-	
+
 	@Override
-	public Vache modifier(Vache vache, String attribut, String nouveauNom) {
-		
+	public Vache modifier(Vache vache, String attribut, String nouvelleValeur) {
+
 		Method setter;
 		try {
-			// recuperation du setter en fonction du descripteur utilise
-			setter = vache.getClass().getMethod("set"+attribut.substring(0, 1).toUpperCase() + attribut.substring(1), String.class);
-			
-			//modification de la valeur
-			setter.invoke(vache, nouveauNom);
-			
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+
+			if ("nom".equals(attribut) || "race".equals(attribut) || "type".equals(attribut)) {
+
+				// recuperation du setter en fonction du descripteur utilise
+				setter = vache.getClass().getMethod(
+						"set" + attribut.substring(0, 1).toUpperCase() + attribut.substring(1), String.class);
+				setter.invoke(vache, nouvelleValeur);
+				
+			} else if ("age".equals(attribut)) {
+
+				// recuperation du setter en fonction du descripteur utilise
+				setter = vache.getClass().getMethod(
+						"set" + attribut.substring(0, 1).toUpperCase() + attribut.substring(1), int.class);
+				setter.invoke(vache, Integer.valueOf(nouvelleValeur));
+				
+				
+			} else if ("amange".equals(attribut) || "abu".equals(attribut) || "ajouee".equals(attribut) || "adormi".equals(attribut) || "acourue".equals(attribut)) {
+
+				// recuperation du setter en fonction du descripteur utilise
+				setter = vache.getClass().getMethod(
+						"set" + attribut.substring(0, 1).toUpperCase() + attribut.substring(1), boolean.class);
+				setter.invoke(vache, Boolean.parseBoolean(nouvelleValeur));
+			}
+
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		
+
 		return vache;
 	}
 
