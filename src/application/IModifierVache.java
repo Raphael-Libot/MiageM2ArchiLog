@@ -1,7 +1,7 @@
 package application;
 
 /**
- * Interface que doit implmenter la classe de modification
+ * Interface que doit implementer la classe de modification
  *
  */
 public interface IModifierVache {

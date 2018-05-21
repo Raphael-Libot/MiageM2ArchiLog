@@ -20,7 +20,7 @@ return
 		"    *  ||----||    \n" +
 		"       ^^    ^^    \n";
 		} else {
-			return "Vous n'avez pas chargé de vache";
+			return "Vous n'avez pas chargÃ© de vache";
 		}
 	}
 }

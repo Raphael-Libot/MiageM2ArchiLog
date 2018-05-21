@@ -14,7 +14,7 @@ public class SimpleCustomAfficheur implements IAfficheur {
 		if (vache != null) {
 			return "Je suis une vache, mes informations sont les suivantes : \n" + vache.toString();
 		} else {
-			return "Vous n'avez pas chargé de vache";
+			return "Vous n'avez pas chargÃ© de vache";
 		}
 	}
 

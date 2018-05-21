@@ -58,7 +58,7 @@ public class DefaultWindows extends JFrame {
 		this.setVisible(true);
 	}
 
-	public void ajoutBoutonAfficheur(DescripteurPlugin descPlugin) {
+	public void ajoutBoutonAfficheur(final DescripteurPlugin descPlugin) {
 		JToggleButton button = new JToggleButton(descPlugin.getNom());
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -8,34 +8,37 @@ public class Mange implements IComportement{
 	@Override
 	public String manger(Vache vache) {
 		vache.setAmange(true);
-		return "la vache est en train de manger";
+		vache.setAbu(false);
+		return "la vache est en train de manger. Ne pas oublier de la faire boire :-D ";
 	}
 
 	@Override
 	public String boire(Vache vache) {
-		return null;
-		// TODO Auto-generated method stub
+		vache.setAbu(true);
+		return "la vache vient de boire";
 		
 	}
 
 	@Override
 	public String dormir(Vache vache) {
-		return null;
-		// TODO Auto-generated method stub
+		vache.setAdormi(true);
+		return "la vache est en train de dormir";
+
 		
 	}
 
 	@Override
 	public String courir(Vache vache) {
-		return null;
-		// TODO Auto-generated method stub
+		vache.setAcourue(true);
+		vache.setAbu(false);
+		return "la vache vient de courir. Ne pas oublier de la faire boire :-D ";
 		
 	}
 
 	@Override
 	public String jouer(Vache vache) {
-		return null;
-		// TODO Auto-generated method stub
+		vache.setAjouee(true);
+		return "la vache vient de jouer";
 		
 	}
 

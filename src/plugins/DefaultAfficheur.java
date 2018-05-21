@@ -14,7 +14,7 @@ public class DefaultAfficheur implements IAfficheur{
 		if(vache!=null) {
 			return vache.toString();
 		}else{
-			return "Vous n'avez pas chargé de vache";
+			return "Vous n'avez pas chargÃ© de vache";
 		}
 	};
 	
