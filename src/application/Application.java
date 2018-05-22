@@ -133,7 +133,7 @@ public class Application extends JFrame {
 	public void chargementVache(DescripteurPlugin desc) {
 		try {
 			IChargeurVache chargeur = (IChargeurVache) Class.forName(desc.getNomClasse()).newInstance();
-			maVache = chargeur.chargementVache();
+			maVache = (Vache) chargeur.chargementVache();
 			this.afficherVache(maVache.toString());
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

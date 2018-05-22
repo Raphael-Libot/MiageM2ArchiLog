@@ -42,8 +42,8 @@ public class Vache {
 
 	@Override
 	public String toString() {
-		return "Vache [nom=" + nom + ", age=" + age + ", race=" + race + ", type=" + type + ", amange=" + amange
-				+ ", abu=" + abu + ", ajouee=" + ajouee + ", adormi=" + adormi + ", acourue=" + acourue + "]";
+		return "Vache [nom=" + nom + ", age=" + age + ", race=" + race + ", type=" + type + ", a mange=" + amange
+				+ ", a bu=" + abu + ", a jouee=" + ajouee + ", a dormi=" + adormi + ", a courue=" + acourue + "]";
 	}
 
 	public String getNom() {

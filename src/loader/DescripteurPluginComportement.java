@@ -1,6 +1,6 @@
 package loader;
 
-public class DescripteurPluginComportement  extends DescripteurPlugin {
+public class DescripteurPluginComportement extends DescripteurPlugin {
 
 	private String methode;
 	
