@@ -101,31 +101,33 @@ public class Application extends JFrame {
 		}
 	}
 	
-	public void changementAfficheur(DescripteurPlugin desc) {
+	public void modifierMaVache(DescripteurPlugin desc, String nomVache) {
 		try {
-			IAfficheur afficheur = (IAfficheur) Class.forName(desc.getNomClasse()).newInstance();
-			afficheur.afficher(maVache, this);
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			IModifierVache modifier = (IModifierVache) Loader.donnePlugin(desc);
+			modifier.modifier(maVache, desc.getAttrEnPlus(), nomVache);
+			this.modifierVache(maVache, desc.getAttrEnPlus());
+		} catch (IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	public void changementAfficheur(DescripteurPlugin desc) {
+		IAfficheur afficheur = (IAfficheur) Loader.donnePlugin(desc);
+		afficheur.afficher(maVache, this);
+	}
+	
 	public void chargementVache(DescripteurPlugin desc) {
-		try {
-			IChargeurVache chargeur = (IChargeurVache) Class.forName(desc.getNomClasse()).newInstance();
-			maVache = (Vache) chargeur.chargementVache();
-			this.afficherVache(maVache.toString());
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		IChargeurVache chargeur = (IChargeurVache) Loader.donnePlugin(desc);
+		maVache = (Vache) chargeur.chargementVache();
+		this.afficherVache(maVache.toString());
 	}
 	
 	public void comportementVache(DescripteurPlugin desc) {
 		try {
-			IComportement comportement = (IComportement) Class.forName(desc.getNomClasse()).newInstance();
+			IComportement comportement = (IComportement) Loader.donnePlugin(desc);
 			Method methode = comportement.getClass().getMethod(((DescripteurPlugin) desc).getAttrEnPlus(),Vache.class);
 			this.afficherText((String) methode.invoke(comportement, maVache));
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
@@ -136,16 +138,6 @@ public class Application extends JFrame {
 	
 	public void afficherVache(final String vache) {
 		this.afficheur.setText(vache);
-	}
-
-	public void modifierMaVache(DescripteurPlugin desc, String nomVache) {
-		try {
-			IModifierVache modifier = (IModifierVache) Class.forName(desc.getNomClasse()).newInstance();
-			modifier.modifier(maVache, desc.getAttrEnPlus(), nomVache);
-			this.modifierVache(maVache, desc.getAttrEnPlus());
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public void modifierVache(Vache vache, String attribut) throws IllegalAccessException, IllegalArgumentException,
