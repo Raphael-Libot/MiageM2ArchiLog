@@ -4,19 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.lang.reflect.Method;
 
-import application.Application;
 import application.IAfficheur;
 import application.IChargeurVache;
-import application.IComportement;
 import application.IModifierVache;
-import application.Vache;
-import plugins.DefaultAfficheur;
 
 /**
  * Classe principale de l application
@@ -24,13 +18,7 @@ import plugins.DefaultAfficheur;
  */
 public class Loader {
 	
-	private static List<DescripteurPlugin> listDescriptionPlugin = new ArrayList<>();
-	private static IAfficheur afficheur;
-	private static IModifierVache modifieur;
-	private static IChargeurVache chargeur;
 	private static Loader instance = new Loader();
-	private static Application fenetre;
-	private static Vache vache;
 	
 	public static Loader getInstance(){
 		return instance;
