@@ -1,10 +1,13 @@
-package loader;
+package application;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -17,9 +20,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
-import application.Vache;
+import loader.DescripteurPlugin;
+import loader.Loader;
 
-public class DefaultWindows extends JFrame {
+public class Application extends JFrame {
 
 	JLabel Titre;
 	JLabel Titrecomportement;
@@ -46,11 +50,22 @@ public class DefaultWindows extends JFrame {
 	ButtonGroup toggleBlockButtonBehavior;
 	ButtonGroup toggleBlockButtonLoader;
 	ButtonGroup toggleBlockButtonModifier;
+	
+	private static Vache maVache;
 
-	public DefaultWindows() {
+	public Application() {
 
 
 		initComponents();
+		try {
+			List<DescripteurPlugin> descPlugin = Loader.chargementPlugins();
+			for(DescripteurPlugin desc : descPlugin) {
+				this.ajoutBoutonAfficheur(desc);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -62,30 +77,23 @@ public class DefaultWindows extends JFrame {
 		JToggleButton button = new JToggleButton(descPlugin.getNom());
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					switch (descPlugin.getImplementedInterface()) {
-					case "IAfficheur":
-						Loader.changementAfficheur(descPlugin.getNomClasse());
-						break;
-					case "IModifierVache":
-						Loader.modifierVache(descPlugin.getNomClasse(),
-								((DescripteurPluginModifier) descPlugin).getAttAModifier(),
-								((String) JOptionPane.showInputDialog(
-										"Changement de : " + ((DescripteurPluginModifier) descPlugin).getAttAModifier(),
-										null)));
-						break;
-					case "IChargeurVache":
-						Loader.charger(descPlugin.getNomClasse());
-						break;
-					case "IComportement":
-						Loader.comportement(descPlugin.getNomClasse(), ((DescripteurPluginComportement) descPlugin).getMethode());
-					default:
-						break;
-					}
-
-				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				switch (descPlugin.getImplementedInterface()) {
+				case "IAfficheur":
+					changementAfficheur(descPlugin);
+					break;
+				case "IModifierVache":
+					modifierMaVache(descPlugin,
+							((String) JOptionPane.showInputDialog(
+									"Changement de : " + ((DescripteurPlugin) descPlugin).getAttrEnPlus(),
+									null)));
+					break;
+				case "IChargeurVache":
+					chargementVache(descPlugin);
+					break;
+				case "IComportement":
+					comportementVache(descPlugin);
+				default:
+					break;
 				}
 			}
 		});
@@ -111,6 +119,50 @@ public class DefaultWindows extends JFrame {
 			break;
 		}
 	}
+	
+	public void changementAfficheur(DescripteurPlugin desc) {
+		try {
+			IAfficheur afficheur = (IAfficheur) Class.forName(desc.getNomClasse()).newInstance();
+			afficheur.afficher(maVache, this);
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void chargementVache(DescripteurPlugin desc) {
+		try {
+			IChargeurVache chargeur = (IChargeurVache) Class.forName(desc.getNomClasse()).newInstance();
+			maVache = chargeur.chargementVache();
+			this.afficherVache(maVache.toString());
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void comportementVache(DescripteurPlugin desc) {
+		try {
+			IComportement comportement = (IComportement) Class.forName(desc.getNomClasse()).newInstance();
+			Method methode = comportement.getClass().getMethod(((DescripteurPlugin) desc).getAttrEnPlus(),Vache.class);
+			this.afficherText((String) methode.invoke(comportement, maVache));
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void afficherText(final String texte) {
 		this.afficheur.setText(texte);
@@ -120,6 +172,29 @@ public class DefaultWindows extends JFrame {
 		this.afficheur.setText(vache);
 	}
 
+	public void modifierMaVache(DescripteurPlugin desc, String nomVache) {
+		try {
+			IModifierVache modifier = (IModifierVache) Class.forName(desc.getNomClasse()).newInstance();
+			modifier.modifier(maVache, desc.getAttrEnPlus(), nomVache);
+			this.modifierVache(maVache, desc.getAttrEnPlus());
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void modifierVache(Vache vache, String attribut) throws IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchMethodException, SecurityException {
 		this.afficheur.setText(attribut + " de la vache devient : " + vache.getClass()

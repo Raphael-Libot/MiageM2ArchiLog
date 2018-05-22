@@ -9,6 +9,7 @@ public class DescripteurPlugin {
 	private String nom;
     private String nomClasse;
     private String implementedInterface;
+    private String attrEnPlus;
 
     public DescripteurPlugin(String nom, String nomC, String implI) {
     	this.nom = nom;
@@ -16,7 +17,23 @@ public class DescripteurPlugin {
         this.implementedInterface = implI;
     }
 
-    public String getImplementedInterface(){
+    public DescripteurPlugin(String nom, String nomClasse, String implementedInterface, String attrEnPlus) {
+		super();
+		this.nom = nom;
+		this.nomClasse = nomClasse;
+		this.implementedInterface = implementedInterface;
+		this.attrEnPlus = attrEnPlus;
+	}
+
+	public String getAttrEnPlus() {
+		return attrEnPlus;
+	}
+
+	public void setAttrEnPlus(String attrEnPlus) {
+		this.attrEnPlus = attrEnPlus;
+	}
+
+	public String getImplementedInterface(){
     	return implementedInterface;
     }
     

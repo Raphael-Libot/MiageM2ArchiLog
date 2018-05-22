@@ -1,8 +1,8 @@
 package plugins;
 
+import application.Application;
 import application.IAfficheur;
 import application.Vache;
-import loader.DefaultWindows;
 
 /**
  * Afficheur plus develope
@@ -11,7 +11,7 @@ import loader.DefaultWindows;
 public class SimpleCustomAfficheur implements IAfficheur {
 
 	@Override
-	public void afficher(Vache vache, DefaultWindows fenetre) {
+	public void afficher(Vache vache, Application fenetre) {
 		if(vache!=null) {
 			fenetre.afficherText("Je suis une vache, mes informations sont les suivantes : \n" + vache.toString());
 		} else {
