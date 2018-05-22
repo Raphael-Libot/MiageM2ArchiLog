@@ -1,5 +1,9 @@
 package application;
 
+/**
+ * écran principal de l'application
+ */
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +39,10 @@ public class Application extends JFrame {
 	ButtonGroup toggleBlockButtonModifier;
 	
 	private static Vache maVache;
+	
+	/**
+	  * Constructeur  
+	  * */
 
 	public Application() {
 
@@ -50,10 +58,18 @@ public class Application extends JFrame {
 
 	}
 
+	/**
+	  * Fonction qui permet d'afficher l'écran de l'application
+	  * */
+	
 	public void display() {
 		this.setVisible(true);
 	}
 
+	/**
+	  * Ajout d'un bouton dans l'application  
+	  * @param  descPlugin descripteur du plugin qui sera lancé par le bouton
+	  * */
 	public void ajoutBoutonAfficheur(final DescripteurPlugin descPlugin) {
 		JToggleButton button = new JToggleButton(descPlugin.getNom());
 		button.addActionListener(new ActionListener() {
@@ -101,6 +117,12 @@ public class Application extends JFrame {
 		}
 	}
 	
+	/**
+	  * Modification d'une caractéristique de la vache
+	  * @param  descPlugin descripteur du plugin
+	  * @param  nomVache : nom de la vache
+	  * */
+	
 	public void modifierMaVache(DescripteurPlugin desc, String nomVache) {
 		try {
 			IModifierVache modifier = (IModifierVache) Loader.donnePlugin(desc);
@@ -111,16 +133,30 @@ public class Application extends JFrame {
 		}
 	}
 	
+	/**
+	  * Affichage de la vache à l'écran  
+	  * @param  descPlugin descripteur du plugin
+	  * */
+	
 	public void changementAfficheur(DescripteurPlugin desc) {
 		IAfficheur afficheur = (IAfficheur) Loader.donnePlugin(desc);
 		afficheur.afficher(maVache, this);
 	}
 	
+	/**
+	  * Chargement d'une vache à afficher à l'écran
+	  * @param  descPlugin descripteur du plugin
+	  * */
 	public void chargementVache(DescripteurPlugin desc) {
 		IChargeurVache chargeur = (IChargeurVache) Loader.donnePlugin(desc);
 		maVache = (Vache) chargeur.chargementVache();
 		this.afficherVache(maVache.toString());
 	}
+	
+	/**
+	  * Chargement d'un comportement de la vache
+	  * @param  descPlugin descripteur du plugin
+	  * */
 	
 	public void comportementVache(DescripteurPlugin desc) {
 		try {
@@ -130,20 +166,39 @@ public class Application extends JFrame {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	  * Affichage de texte
+	  * @param  texte : texte à afficher
+	  * */
 
 	public void afficherText(final String texte) {
 		this.afficheur.setText(texte);
 	}
 	
+	/**
+	  * Affichage de texte
+	  * @param  vache : texte à afficher
+	  * */
+	
 	public void afficherVache(final String vache) {
 		this.afficheur.setText(vache);
 	}
 	
+	/**
+	  * Modification d'une caractéristique de la vache
+	  * @param  vache : la vache à modifier
+	  * @param  attribut : attribut à modifier
+	  * */
 	public void modifierVache(Vache vache, String attribut) throws IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchMethodException, SecurityException {
 		this.afficheur.setText(attribut + " de la vache devient : " + vache.getClass()
 				.getMethod("get" + attribut.substring(0, 1).toUpperCase() + attribut.substring(1)).invoke(vache));
 	}
+	
+	/**
+	  * Initialisation de l'écran
+	  * */
 
 	private void initComponents() {
 		JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
