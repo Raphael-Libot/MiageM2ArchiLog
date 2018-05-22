@@ -125,9 +125,8 @@ public class Application extends JFrame {
 	public void comportementVache(DescripteurPlugin desc) {
 		try {
 			IComportement comportement = (IComportement) Loader.donnePlugin(desc);
-			Method methode = comportement.getClass().getMethod(((DescripteurPlugin) desc).getAttrEnPlus(),Vache.class);
-			this.afficherText((String) methode.invoke(comportement, maVache));
-		} catch (IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
+			comportement.agir(maVache, this);
+		} catch ( SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 	}
