@@ -1,12 +1,14 @@
 package application;
 
+import loader.DefaultWindows;
+
 /**
  * Inteface que doivent implmenter les afficheurs
  *
  */
 public interface IAfficheur {
 	
-	public String afficher(final Vache vache);
+	public void afficher(final Vache vache, final DefaultWindows fenetre);
 	
 
 }

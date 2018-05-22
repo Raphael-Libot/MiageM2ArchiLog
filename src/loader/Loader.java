@@ -64,7 +64,7 @@ public class Loader {
 			if(d.getNomClasse().equals(nom)){
 				chargeur = (IChargeurVache) Class.forName(d.getNomClasse()).newInstance();
 				vache = (Vache) chargeur.chargementVache();
-				fenetre.afficherVache(afficheur.afficher(vache));
+				afficheur.afficher(vache, fenetre);
 			}
 		}
 	}
@@ -73,7 +73,7 @@ public class Loader {
 		for(DescripteurPlugin d : listDescriptionPlugin) {
 			if(d.getNomClasse().equals(nom)){
 				afficheur = (IAfficheur) Class.forName(d.getNomClasse()).newInstance();
-				fenetre.afficherVache(afficheur.afficher(vache));
+				afficheur.afficher(vache, fenetre);
 			}
 		}
 	}
@@ -108,7 +108,7 @@ public class Loader {
 				}
 			}
 		} else {
-			fenetre.afficherVache(afficheur.afficher(vache));
+			afficheur.afficher(vache, fenetre);
 		}
 	}
 	
@@ -130,7 +130,7 @@ public class Loader {
 				}
 			}
 		} else {
-			fenetre.afficherVache(afficheur.afficher(vache));
+			afficheur.afficher(vache, fenetre);
 		}
 	}
 	

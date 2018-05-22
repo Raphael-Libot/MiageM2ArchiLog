@@ -2,6 +2,7 @@ package plugins;
 
 import application.IAfficheur;
 import application.Vache;
+import loader.DefaultWindows;
 
 /**
  * Afficheur basique
@@ -10,11 +11,11 @@ import application.Vache;
 public class DefaultAfficheur implements IAfficheur{
 
 	@Override
-	public String afficher(Vache vache) {
+	public void afficher(Vache vache, DefaultWindows fenetre) {
 		if(vache!=null) {
-			return vache.toString();
+			fenetre.afficherText(vache.toString());
 		}else{
-			return "Vous n'avez pas chargé de vache";
+			fenetre.afficherText("Vous n'avez pas chargé de vache");
 		}
 	};
 	

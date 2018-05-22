@@ -2,6 +2,7 @@ package plugins;
 
 import application.IAfficheur;
 import application.Vache;
+import loader.DefaultWindows;
 
 /**
  * Afficheur d une vache en ascii
@@ -9,18 +10,18 @@ import application.Vache;
  */
 public class VacheAfficheur implements IAfficheur{
 	@Override
-	public String afficher(Vache vache) {
+	public void afficher(Vache vache, DefaultWindows fenetre) {
 		
 		if(vache != null){
-return 
+			fenetre.afficherText( 
 		"             (__)  \n" +
 		"             (oo)  \n" +
 		"      /-------\\/   \n" +
 		"     / |     ||    \n" + 
 		"    *  ||----||    \n" +
-		"       ^^    ^^    \n";
+		"       ^^    ^^    \n");
 		} else {
-			return "Vous n'avez pas chargé de vache";
+			fenetre.afficherText("Vous n'avez pas chargé de vache");
 		}
 	}
 }
