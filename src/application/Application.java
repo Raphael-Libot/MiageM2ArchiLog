@@ -25,26 +25,12 @@ import loader.Loader;
 
 public class Application extends JFrame {
 
-	JLabel Titre;
-	JLabel Titrecomportement;
-	JScrollPane Scrolafficheur;
 	JPanel blockButtonBehavior;
 	JPanel blockButtonDisplay;
 	JPanel blockButtonLaoder;
-	JScrollPane jScrollPane1;
-	JTextArea afficheur;
-	JPanel panelGloblae;
-	JLabel titreAfficheur;
-	JLabel titreChargement;
-	JPanel zoneAffichage;
-	JPanel zoneBehaviour;
-	JPanel zoneDisplay;
-	JPanel zoneLoader;
-	JPanel zoneTitre;
-
-	JPanel zoneModifier;
-	JLabel titreModifier;
 	JPanel blockButtonModifier;
+	
+	JTextArea afficheur;
 
 	ButtonGroup toggleBlockButtonDisplay;
 	ButtonGroup toggleBlockButtonBehavior;
@@ -55,7 +41,6 @@ public class Application extends JFrame {
 
 	public Application() {
 
-
 		initComponents();
 		try {
 			List<DescripteurPlugin> descPlugin = Loader.chargementPlugins();
@@ -63,7 +48,6 @@ public class Application extends JFrame {
 				this.ajoutBoutonAfficheur(desc);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -125,7 +109,6 @@ public class Application extends JFrame {
 			IAfficheur afficheur = (IAfficheur) Class.forName(desc.getNomClasse()).newInstance();
 			afficheur.afficher(maVache, this);
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -136,7 +119,6 @@ public class Application extends JFrame {
 			maVache = chargeur.chargementVache();
 			this.afficherVache(maVache.toString());
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -146,20 +128,7 @@ public class Application extends JFrame {
 			IComportement comportement = (IComportement) Class.forName(desc.getNomClasse()).newInstance();
 			Method methode = comportement.getClass().getMethod(((DescripteurPlugin) desc).getAttrEnPlus(),Vache.class);
 			this.afficherText((String) methode.invoke(comportement, maVache));
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
@@ -177,20 +146,7 @@ public class Application extends JFrame {
 			IModifierVache modifier = (IModifierVache) Class.forName(desc.getNomClasse()).newInstance();
 			modifier.modifier(maVache, desc.getAttrEnPlus(), nomVache);
 			this.modifierVache(maVache, desc.getAttrEnPlus());
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
@@ -202,25 +158,25 @@ public class Application extends JFrame {
 	}
 
 	private void initComponents() {
-		jScrollPane1 = new javax.swing.JScrollPane();
-		panelGloblae = new javax.swing.JPanel();
-		zoneTitre = new javax.swing.JPanel();
-		Titre = new javax.swing.JLabel();
-		zoneLoader = new javax.swing.JPanel();
+		JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
+		JPanel panelGloblae = new javax.swing.JPanel();
+		JPanel zoneTitre = new javax.swing.JPanel();
+		JLabel Titre = new javax.swing.JLabel();
+		JPanel zoneLoader = new javax.swing.JPanel();
 		blockButtonLaoder = new javax.swing.JPanel();
-		titreChargement = new javax.swing.JLabel();
-		zoneAffichage = new javax.swing.JPanel();
-		Scrolafficheur = new javax.swing.JScrollPane();
+		JLabel titreChargement = new javax.swing.JLabel();
+		JPanel zoneAffichage = new javax.swing.JPanel();
+		JScrollPane Scrolafficheur = new javax.swing.JScrollPane();
 		afficheur = new javax.swing.JTextArea();
-		zoneDisplay = new javax.swing.JPanel();
-		titreAfficheur = new javax.swing.JLabel();
+		JPanel zoneDisplay = new javax.swing.JPanel();
+		JLabel titreAfficheur = new javax.swing.JLabel();
 		blockButtonDisplay = new javax.swing.JPanel();
-		zoneBehaviour = new javax.swing.JPanel();
-		Titrecomportement = new javax.swing.JLabel();
+		JPanel zoneBehaviour = new javax.swing.JPanel();
+		JLabel Titrecomportement = new javax.swing.JLabel();
 		blockButtonBehavior = new javax.swing.JPanel();
 		
-		zoneModifier = new JPanel();
-		titreModifier = new javax.swing.JLabel();
+		JPanel zoneModifier = new JPanel();
+		JLabel titreModifier = new javax.swing.JLabel();
 		blockButtonModifier = new javax.swing.JPanel();
 
 		this.toggleBlockButtonLoader = new ButtonGroup();

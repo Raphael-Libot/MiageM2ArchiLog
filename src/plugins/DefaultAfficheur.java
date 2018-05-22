@@ -15,7 +15,7 @@ public class DefaultAfficheur implements IAfficheur{
 		if(vache!=null) {
 			fenetre.afficherText(vache.toString());
 		}else{
-			fenetre.afficherText("Vous n'avez pas chargÃ© de vache");
+			fenetre.afficherText("Vous n'avez pas chargé de vache");
 		}
 	};
 	
