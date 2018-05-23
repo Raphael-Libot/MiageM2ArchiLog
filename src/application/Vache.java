@@ -13,21 +13,22 @@ public class Vache {
 	private String race;
 
 	private String type;
-	
+
 	private boolean amange;
-	
+
 	private boolean abu;
-	
+
 	private boolean ajouee;
-	
+
 	private boolean adormi;
-	
+
 	private boolean acourue;
-	
+
 	public Vache() {
 	}
 
-	public Vache(String nom, int age, String race, String type, boolean amange, boolean abu, boolean ajouee, boolean adormi, boolean acourue) {
+	public Vache(String nom, int age, String race, String type, boolean amange, boolean abu, boolean ajouee,
+			boolean adormi, boolean acourue) {
 		this.nom = nom;
 		this.age = age;
 		this.race = race;
@@ -38,7 +39,6 @@ public class Vache {
 		this.adormi = adormi;
 		this.acourue = acourue;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -117,9 +117,5 @@ public class Vache {
 	public void setAcourue(boolean acourue) {
 		this.acourue = acourue;
 	}
-
-
-	
-	
 
 }

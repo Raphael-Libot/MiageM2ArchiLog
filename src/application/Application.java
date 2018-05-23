@@ -30,26 +30,25 @@ public class Application extends JFrame {
 	JPanel blockButtonDisplay;
 	JPanel blockButtonLaoder;
 	JPanel blockButtonModifier;
-	
+
 	JTextArea afficheur;
 
 	ButtonGroup toggleBlockButtonDisplay;
 	ButtonGroup toggleBlockButtonBehavior;
 	ButtonGroup toggleBlockButtonLoader;
 	ButtonGroup toggleBlockButtonModifier;
-	
-	private static Vache maVache;
-	
-	/**
-	  * Constructeur  
-	  * */
 
+	private static Vache maVache;
+
+	/**
+	 * Constructeur
+	 */
 	public Application() {
 
 		initComponents();
 		try {
 			List<DescripteurPlugin> descPlugin = Loader.chargementPlugins();
-			for(DescripteurPlugin desc : descPlugin) {
+			for (DescripteurPlugin desc : descPlugin) {
 				this.ajoutBoutonAfficheur(desc);
 			}
 		} catch (IOException e) {
@@ -59,17 +58,18 @@ public class Application extends JFrame {
 	}
 
 	/**
-	  * Fonction qui permet d'afficher l'écran de l'application
-	  * */
-	
+	 * Fonction qui permet d'afficher l'écran de l'application
+	 */
 	public void display() {
 		this.setVisible(true);
 	}
 
 	/**
-	  * Ajout d'un bouton dans l'application  
-	  * @param  descPlugin descripteur du plugin qui sera lancé par le bouton
-	  * */
+	 * Ajout d'un bouton dans l'application
+	 * 
+	 * @param descPlugin
+	 *            descripteur du plugin qui sera lancé par le bouton
+	 */
 	public void ajoutBoutonAfficheur(final DescripteurPlugin descPlugin) {
 		JToggleButton button = new JToggleButton(descPlugin.getNom());
 		button.addActionListener(new ActionListener() {
@@ -79,10 +79,8 @@ public class Application extends JFrame {
 					changementAfficheur(descPlugin);
 					break;
 				case "IModifierVache":
-					modifierMaVache(descPlugin,
-							((String) JOptionPane.showInputDialog(
-									"Changement de : " + ((DescripteurPlugin) descPlugin).getAttrEnPlus(),
-									null)));
+					modifierMaVache(descPlugin, ((String) JOptionPane.showInputDialog(
+							"Changement de : " + ((DescripteurPlugin) descPlugin).getAttrEnPlus(), null)));
 					break;
 				case "IChargeurVache":
 					chargementVache(descPlugin);
@@ -116,90 +114,102 @@ public class Application extends JFrame {
 			break;
 		}
 	}
-	
+
 	/**
-	  * Modification d'une caractéristique de la vache
-	  * @param  descPlugin descripteur du plugin
-	  * @param  nomVache : nom de la vache
-	  * */
-	
+	 * Modification d'une caractéristique de la vache
+	 * 
+	 * @param descPlugin
+	 *            descripteur du plugin
+	 * @param nomVache
+	 *            : nom de la vache
+	 */
 	public void modifierMaVache(DescripteurPlugin desc, String nomVache) {
 		try {
 			IModifierVache modifier = (IModifierVache) Loader.donnePlugin(desc);
 			modifier.modifier(maVache, desc.getAttrEnPlus(), nomVache);
 			this.modifierVache(maVache, desc.getAttrEnPlus());
-		} catch (IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException
+				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	  * Affichage de la vache à l'écran  
-	  * @param  descPlugin descripteur du plugin
-	  * */
-	
+	 * Affichage de la vache à l'écran
+	 * 
+	 * @param descPlugin
+	 *            descripteur du plugin
+	 */
 	public void changementAfficheur(DescripteurPlugin desc) {
 		IAfficheur afficheur = (IAfficheur) Loader.donnePlugin(desc);
 		afficheur.afficher(maVache, this);
 	}
-	
+
 	/**
-	  * Chargement d'une vache à afficher à l'écran
-	  * @param  descPlugin descripteur du plugin
-	  * */
+	 * Chargement d'une vache à afficher à l'écran
+	 * 
+	 * @param descPlugin
+	 *            descripteur du plugin
+	 */
 	public void chargementVache(DescripteurPlugin desc) {
 		IChargeurVache chargeur = (IChargeurVache) Loader.donnePlugin(desc);
 		maVache = (Vache) chargeur.chargementVache();
 		this.afficherVache(maVache.toString());
 	}
-	
+
 	/**
-	  * Chargement d'un comportement de la vache
-	  * @param  descPlugin descripteur du plugin
-	  * */
-	
+	 * Chargement d'un comportement de la vache
+	 * 
+	 * @param descPlugin
+	 *            descripteur du plugin
+	 */
 	public void comportementVache(DescripteurPlugin desc) {
 		try {
 			IComportement comportement = (IComportement) Loader.donnePlugin(desc);
 			comportement.agir(maVache, this);
-		} catch ( SecurityException | IllegalArgumentException e) {
+		} catch (SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	  * Affichage de texte
-	  * @param  texte : texte à afficher
-	  * */
 
+	/**
+	 * Affichage de texte
+	 * 
+	 * @param texte
+	 *            : texte à afficher
+	 */
 	public void afficherText(final String texte) {
 		this.afficheur.setText(texte);
 	}
-	
+
 	/**
-	  * Affichage de texte
-	  * @param  vache : texte à afficher
-	  * */
-	
+	 * Affichage de texte
+	 * 
+	 * @param vache
+	 *            : texte à afficher
+	 */
 	public void afficherVache(final String vache) {
 		this.afficheur.setText(vache);
 	}
-	
+
 	/**
-	  * Modification d'une caractéristique de la vache
-	  * @param  vache : la vache à modifier
-	  * @param  attribut : attribut à modifier
-	  * */
+	 * Modification d'une caractéristique de la vache
+	 * 
+	 * @param vache
+	 *            : la vache à modifier
+	 * @param attribut
+	 *            : attribut à modifier
+	 */
 	public void modifierVache(Vache vache, String attribut) throws IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchMethodException, SecurityException {
 		this.afficheur.setText(attribut + " de la vache devient : " + vache.getClass()
 				.getMethod("get" + attribut.substring(0, 1).toUpperCase() + attribut.substring(1)).invoke(vache));
 	}
-	
-	/**
-	  * Initialisation de l'écran
-	  * */
 
+	/**
+	 * Initialisation de l'écran
+	 * CODE GENERE A PARTIR DE L'EDITEUR PRESENT DANS NETBEAN
+	 */
 	private void initComponents() {
 		JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
 		JPanel panelGloblae = new javax.swing.JPanel();
@@ -217,7 +227,7 @@ public class Application extends JFrame {
 		JPanel zoneBehaviour = new javax.swing.JPanel();
 		JLabel Titrecomportement = new javax.swing.JLabel();
 		blockButtonBehavior = new javax.swing.JPanel();
-		
+
 		JPanel zoneModifier = new JPanel();
 		JLabel titreModifier = new javax.swing.JLabel();
 		blockButtonModifier = new javax.swing.JPanel();
@@ -270,13 +280,9 @@ public class Application extends JFrame {
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(51, 51, 51)));
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		titreModifier.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		titreModifier.setText("Plugins de modification :");
-		
-		
+
 		zoneModifier.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 		javax.swing.GroupLayout zoneModifierLayout = new javax.swing.GroupLayout(zoneModifier);
 		zoneModifier.setLayout(zoneModifierLayout);
@@ -297,11 +303,7 @@ public class Application extends JFrame {
 								.addComponent(blockButtonModifier, javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(51, 51, 51)));
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		
+
 		zoneAffichage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
 		afficheur.setColumns(20);
@@ -326,7 +328,6 @@ public class Application extends JFrame {
 
 		titreAfficheur.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		titreAfficheur.setText("Plugins de afficheurs :");
-
 
 		javax.swing.GroupLayout zoneDisplayLayout = new javax.swing.GroupLayout(zoneDisplay);
 		zoneDisplay.setLayout(zoneDisplayLayout);
@@ -443,8 +444,5 @@ public class Application extends JFrame {
 								.addGap(0, 0, Short.MAX_VALUE))));
 
 		pack();
-	}// </editor-fold>
-
-	// Variables declaration - do not modify
-
+	}
 }

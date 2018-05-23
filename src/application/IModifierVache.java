@@ -1,8 +1,7 @@
 package application;
 
 /**
- * Interface que doit implementer la classe de modification
- *
+ * Interface à implémenter dans le but de rajouter un pluging de modification (un plugin de modification generique est deja present dans l'app)
  */
 public interface IModifierVache {
 	

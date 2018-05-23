@@ -1,7 +1,7 @@
 package application;
 
 /**
- * Inteface que doivent implmenter les afficheurs
+ * Interface a implémenter pour ajouter un nouveau plugin d'affichage
  *
  */
 public interface IAfficheur {

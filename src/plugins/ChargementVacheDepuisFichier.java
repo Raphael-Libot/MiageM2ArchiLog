@@ -10,7 +10,7 @@ import java.util.Properties;
 import application.IChargeurVache;
 
 /**
- * Classe de cr�ation d un objet vache a partir d un fichier de properties
+ * Classe de création d un objet vache a partir d un fichier de properties
  *
  */
 public class ChargementVacheDepuisFichier implements IChargeurVache {

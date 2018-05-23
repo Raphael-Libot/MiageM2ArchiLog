@@ -9,7 +9,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import application.IChargeurVache;
 
-
+/**
+ * Classe d'un plugin de création de vache
+ * 
+ */
 public class ChargementVacheAleatoire implements IChargeurVache {
 
 	public Object chargementVache() {

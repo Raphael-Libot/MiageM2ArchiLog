@@ -18,12 +18,6 @@ import application.IModifierVache;
  */
 public class Loader {
 	
-	private static Loader instance = new Loader();
-	
-	public static Loader getInstance(){
-		return instance;
-	}
-	
 	/**
 	 * Chargement de l'ensemble de des plugins 
 	 * @return
@@ -45,6 +39,11 @@ public class Loader {
 		return listePLugin;
 	}
 	
+	/**
+	 * Méthode permettant de récupérer une instance du plugin dont le descripteur est passé en paramètre
+	 * @param d
+	 * @return
+	 */
 	public static Object donnePlugin(DescripteurPlugin d) {
 		Object o = null;
 		try {
